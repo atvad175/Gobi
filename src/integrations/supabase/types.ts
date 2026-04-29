@@ -14,7 +14,171 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      college_notes: {
+        Row: {
+          category: string | null
+          created_at: string
+          deadline: string | null
+          id: string
+          notes: string | null
+          priority: number | null
+          school: string
+          status: string | null
+          user_id: string
+        }
+        Insert: {
+          category?: string | null
+          created_at?: string
+          deadline?: string | null
+          id?: string
+          notes?: string | null
+          priority?: number | null
+          school: string
+          status?: string | null
+          user_id: string
+        }
+        Update: {
+          category?: string | null
+          created_at?: string
+          deadline?: string | null
+          id?: string
+          notes?: string | null
+          priority?: number | null
+          school?: string
+          status?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
+      competitions: {
+        Row: {
+          category: string | null
+          created_at: string
+          deadline: string | null
+          id: string
+          name: string
+          notes: string | null
+          organizer: string | null
+          status: string | null
+          url: string | null
+          user_id: string
+        }
+        Insert: {
+          category?: string | null
+          created_at?: string
+          deadline?: string | null
+          id?: string
+          name: string
+          notes?: string | null
+          organizer?: string | null
+          status?: string | null
+          url?: string | null
+          user_id: string
+        }
+        Update: {
+          category?: string | null
+          created_at?: string
+          deadline?: string | null
+          id?: string
+          name?: string
+          notes?: string | null
+          organizer?: string | null
+          status?: string | null
+          url?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
+      journal_entries: {
+        Row: {
+          body: string | null
+          created_at: string
+          entry_date: string
+          id: string
+          mood: string | null
+          title: string
+          user_id: string
+        }
+        Insert: {
+          body?: string | null
+          created_at?: string
+          entry_date?: string
+          id?: string
+          mood?: string | null
+          title: string
+          user_id: string
+        }
+        Update: {
+          body?: string | null
+          created_at?: string
+          entry_date?: string
+          id?: string
+          mood?: string | null
+          title?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          created_at: string
+          display_name: string | null
+          id: string
+        }
+        Insert: {
+          created_at?: string
+          display_name?: string | null
+          id: string
+        }
+        Update: {
+          created_at?: string
+          display_name?: string | null
+          id?: string
+        }
+        Relationships: []
+      }
+      tournaments: {
+        Row: {
+          assists: number | null
+          created_at: string
+          date: string | null
+          id: string
+          location: string | null
+          name: string
+          points: number | null
+          rebounds: number | null
+          result: string | null
+          review: string | null
+          user_id: string
+        }
+        Insert: {
+          assists?: number | null
+          created_at?: string
+          date?: string | null
+          id?: string
+          location?: string | null
+          name: string
+          points?: number | null
+          rebounds?: number | null
+          result?: string | null
+          review?: string | null
+          user_id: string
+        }
+        Update: {
+          assists?: number | null
+          created_at?: string
+          date?: string | null
+          id?: string
+          location?: string | null
+          name?: string
+          points?: number | null
+          rebounds?: number | null
+          result?: string | null
+          review?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
