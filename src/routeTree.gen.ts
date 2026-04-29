@@ -9,13 +9,20 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as TrainingRouteImport } from './routes/training'
 import { Route as TournamentsRouteImport } from './routes/tournaments'
 import { Route as JournalRouteImport } from './routes/journal'
+import { Route as HighlightsRouteImport } from './routes/highlights'
 import { Route as CompetitionsRouteImport } from './routes/competitions'
 import { Route as CollegeRouteImport } from './routes/college'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as IndexRouteImport } from './routes/index'
 
+const TrainingRoute = TrainingRouteImport.update({
+  id: '/training',
+  path: '/training',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const TournamentsRoute = TournamentsRouteImport.update({
   id: '/tournaments',
   path: '/tournaments',
@@ -24,6 +31,11 @@ const TournamentsRoute = TournamentsRouteImport.update({
 const JournalRoute = JournalRouteImport.update({
   id: '/journal',
   path: '/journal',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HighlightsRoute = HighlightsRouteImport.update({
+  id: '/highlights',
+  path: '/highlights',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CompetitionsRoute = CompetitionsRouteImport.update({
@@ -52,16 +64,20 @@ export interface FileRoutesByFullPath {
   '/auth': typeof AuthRoute
   '/college': typeof CollegeRoute
   '/competitions': typeof CompetitionsRoute
+  '/highlights': typeof HighlightsRoute
   '/journal': typeof JournalRoute
   '/tournaments': typeof TournamentsRoute
+  '/training': typeof TrainingRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/college': typeof CollegeRoute
   '/competitions': typeof CompetitionsRoute
+  '/highlights': typeof HighlightsRoute
   '/journal': typeof JournalRoute
   '/tournaments': typeof TournamentsRoute
+  '/training': typeof TrainingRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -69,8 +85,10 @@ export interface FileRoutesById {
   '/auth': typeof AuthRoute
   '/college': typeof CollegeRoute
   '/competitions': typeof CompetitionsRoute
+  '/highlights': typeof HighlightsRoute
   '/journal': typeof JournalRoute
   '/tournaments': typeof TournamentsRoute
+  '/training': typeof TrainingRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -79,18 +97,30 @@ export interface FileRouteTypes {
     | '/auth'
     | '/college'
     | '/competitions'
+    | '/highlights'
     | '/journal'
     | '/tournaments'
+    | '/training'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/auth' | '/college' | '/competitions' | '/journal' | '/tournaments'
+  to:
+    | '/'
+    | '/auth'
+    | '/college'
+    | '/competitions'
+    | '/highlights'
+    | '/journal'
+    | '/tournaments'
+    | '/training'
   id:
     | '__root__'
     | '/'
     | '/auth'
     | '/college'
     | '/competitions'
+    | '/highlights'
     | '/journal'
     | '/tournaments'
+    | '/training'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -98,12 +128,21 @@ export interface RootRouteChildren {
   AuthRoute: typeof AuthRoute
   CollegeRoute: typeof CollegeRoute
   CompetitionsRoute: typeof CompetitionsRoute
+  HighlightsRoute: typeof HighlightsRoute
   JournalRoute: typeof JournalRoute
   TournamentsRoute: typeof TournamentsRoute
+  TrainingRoute: typeof TrainingRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/training': {
+      id: '/training'
+      path: '/training'
+      fullPath: '/training'
+      preLoaderRoute: typeof TrainingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/tournaments': {
       id: '/tournaments'
       path: '/tournaments'
@@ -116,6 +155,13 @@ declare module '@tanstack/react-router' {
       path: '/journal'
       fullPath: '/journal'
       preLoaderRoute: typeof JournalRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/highlights': {
+      id: '/highlights'
+      path: '/highlights'
+      fullPath: '/highlights'
+      preLoaderRoute: typeof HighlightsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/competitions': {
@@ -154,8 +200,10 @@ const rootRouteChildren: RootRouteChildren = {
   AuthRoute: AuthRoute,
   CollegeRoute: CollegeRoute,
   CompetitionsRoute: CompetitionsRoute,
+  HighlightsRoute: HighlightsRoute,
   JournalRoute: JournalRoute,
   TournamentsRoute: TournamentsRoute,
+  TrainingRoute: TrainingRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

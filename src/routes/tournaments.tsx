@@ -57,6 +57,13 @@ function TournamentsPage() {
     load();
   };
 
+  const games = items.length;
+  const sum = (k: "points" | "rebounds" | "assists") => items.reduce((acc, x) => acc + (x[k] ?? 0), 0);
+  const ppg = games ? +(sum("points") / games).toFixed(1) : 0;
+  const rpg = games ? +(sum("rebounds") / games).toFixed(1) : 0;
+  const apg = games ? +(sum("assists") / games).toFixed(1) : 0;
+  const wins = items.filter((t) => (t.result ?? "").toLowerCase().startsWith("w")).length;
+
   return (
     <div>
       <PageHeader
@@ -65,6 +72,16 @@ function TournamentsPage() {
         lead="Every bracket, every box score, every lesson learned. The receipts."
       />
       <section className="max-w-7xl mx-auto px-6 lg:px-10 pb-20">
+        {games > 0 && (
+          <div className="mb-12 grid grid-cols-2 md:grid-cols-5 gap-px bg-border border border-border">
+            <SeasonStat label="Games" v={games} />
+            <SeasonStat label="W–L" v={`${wins}-${games - wins}`} />
+            <SeasonStat label="PPG" v={ppg} accent />
+            <SeasonStat label="RPG" v={rpg} accent />
+            <SeasonStat label="APG" v={apg} accent />
+          </div>
+        )}
+
         {user && (
           <button onClick={() => setOpen(true)} className="mb-8 inline-flex items-center gap-2 text-sm bg-foreground text-background px-5 py-3 hover:bg-purple transition-colors">
             <Plus className="h-4 w-4" /> Log tournament
@@ -127,6 +144,15 @@ function Stat({ n, label }: { n: number | null; label: string }) {
     <div>
       <p className="font-serif text-3xl">{n ?? "—"}</p>
       <p className="eyebrow text-muted-foreground">{label}</p>
+    </div>
+  );
+}
+
+function SeasonStat({ label, v, accent }: { label: string; v: number | string; accent?: boolean }) {
+  return (
+    <div className="bg-background p-6">
+      <p className="eyebrow text-muted-foreground">{label}</p>
+      <p className={`font-serif text-5xl mt-2 ${accent ? "text-purple" : ""}`}>{v}</p>
     </div>
   );
 }
