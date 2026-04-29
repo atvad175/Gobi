@@ -170,18 +170,65 @@ export type Database = {
         }
         Relationships: []
       }
+      tournament_photos: {
+        Row: {
+          caption: string | null
+          created_at: string
+          id: string
+          is_cover: boolean
+          is_mvp_moment: boolean
+          sort_order: number
+          storage_path: string
+          tournament_id: string
+          user_id: string
+        }
+        Insert: {
+          caption?: string | null
+          created_at?: string
+          id?: string
+          is_cover?: boolean
+          is_mvp_moment?: boolean
+          sort_order?: number
+          storage_path: string
+          tournament_id: string
+          user_id: string
+        }
+        Update: {
+          caption?: string | null
+          created_at?: string
+          id?: string
+          is_cover?: boolean
+          is_mvp_moment?: boolean
+          sort_order?: number
+          storage_path?: string
+          tournament_id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "tournament_photos_tournament_id_fkey"
+            columns: ["tournament_id"]
+            isOneToOne: false
+            referencedRelation: "tournaments"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       tournaments: {
         Row: {
           assists: number | null
           created_at: string
           date: string | null
           id: string
+          is_upcoming: boolean
           location: string | null
           name: string
           points: number | null
           rebounds: number | null
           result: string | null
           review: string | null
+          stage: string | null
+          tip_off: string | null
           user_id: string
         }
         Insert: {
@@ -189,12 +236,15 @@ export type Database = {
           created_at?: string
           date?: string | null
           id?: string
+          is_upcoming?: boolean
           location?: string | null
           name: string
           points?: number | null
           rebounds?: number | null
           result?: string | null
           review?: string | null
+          stage?: string | null
+          tip_off?: string | null
           user_id: string
         }
         Update: {
@@ -202,12 +252,15 @@ export type Database = {
           created_at?: string
           date?: string | null
           id?: string
+          is_upcoming?: boolean
           location?: string | null
           name?: string
           points?: number | null
           rebounds?: number | null
           result?: string | null
           review?: string | null
+          stage?: string | null
+          tip_off?: string | null
           user_id?: string
         }
         Relationships: []
