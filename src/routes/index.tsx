@@ -6,20 +6,22 @@ import heroImg from "@/assets/gobi-hero.jpg";
 import actionImg from "@/assets/gobi-action.jpg";
 import courtImg from "@/assets/court.jpg";
 import signature from "@/assets/signature.png";
-import { ArrowUpRight, Trophy, BookOpen, GraduationCap, Award, Dumbbell, Quote, Flame } from "lucide-react";
+import { ArrowUpRight, Trophy, BookOpen, GraduationCap, Award, Dumbbell, Quote, Flame, Sparkles, Zap } from "lucide-react";
 import { Marquee } from "@/components/Marquee";
 import { BasketballSVG } from "@/components/Basketball";
+import { AuroraBackground } from "@/components/AuroraBackground";
+import { CursorGlow } from "@/components/CursorGlow";
+import { CountUp } from "@/components/CountUp";
+import { QuoteRotator } from "@/components/QuoteRotator";
+import { NextGameCountdown } from "@/components/NextGameCountdown";
+import { Pathway, PathStop } from "@/components/Pathway";
+import { publicUrl } from "@/components/PhotoUpload";
 
 export const Route = createFileRoute("/")({ component: Home });
 
 const MARQUEE = [
-  "Hooper",
-  "Scholar",
-  "Future Ivy",
-  "No. 24",
-  "Mamba Mentality",
-  "Forever Lakers",
-  "Class of 2029",
+  "Hooper", "Scholar", "Future Ivy", "No. 24",
+  "Mamba Mentality", "Forever Lakers", "Class of 2029",
 ];
 
 const PRINCIPLES = [
@@ -29,20 +31,28 @@ const PRINCIPLES = [
   { n: "04", t: "Be the one they trust.", b: "Last shot, last possession, last to leave the gym." },
 ];
 
+type MVP = { id: string; tournament_id: string; storage_path: string; caption: string | null; tournament: { name: string; date: string | null; result: string | null } | null };
+
 function Home() {
   const [counts, setCounts] = useState({ tournaments: 0, journal: 0, college: 0, comps: 0, training: 0 });
   const [averages, setAverages] = useState({ ppg: 0, rpg: 0, apg: 0, games: 0 });
   const [latest, setLatest] = useState<{ title: string; body: string | null; entry_date: string; mood: string | null } | null>(null);
+  const [mvp, setMvp] = useState<MVP | null>(null);
+  const [pathway, setPathway] = useState<PathStop[]>([]);
+  const [nextGame, setNextGame] = useState<{ name: string; tip_off: string } | null>(null);
+  const [careerPoints, setCareerPoints] = useState(0);
 
   useEffect(() => {
     Promise.all([
-      supabase.from("tournaments").select("*"),
+      supabase.from("tournaments").select("*").order("date", { ascending: true }),
       supabase.from("journal_entries").select("*", { count: "exact" }).order("entry_date", { ascending: false }).limit(1),
       supabase.from("college_notes").select("*", { count: "exact", head: true }),
       supabase.from("competitions").select("*", { count: "exact", head: true }),
       supabase.from("training_logs").select("*", { count: "exact", head: true }),
-    ]).then(([t, j, c, cm, tr]) => {
-      const tournaments = (t.data ?? []) as Array<{ points: number | null; rebounds: number | null; assists: number | null }>;
+      supabase.from("tournament_photos").select("*, tournament:tournaments(name,date,result)").eq("is_mvp_moment", true).order("created_at", { ascending: false }).limit(1),
+      supabase.from("tournament_photos").select("tournament_id, storage_path, is_cover, created_at"),
+    ]).then(([t, j, c, cm, tr, mvpRes, photoRes]) => {
+      const tournaments = (t.data ?? []) as any[];
       const games = tournaments.length;
       const sum = (k: "points" | "rebounds" | "assists") =>
         tournaments.reduce((acc, x) => acc + (x[k] ?? 0), 0);
@@ -52,6 +62,7 @@ function Home() {
         apg: games ? +(sum("assists") / games).toFixed(1) : 0,
         games,
       });
+      setCareerPoints(sum("points"));
       setCounts({
         tournaments: games,
         journal: j.count ?? 0,
@@ -60,17 +71,43 @@ function Home() {
         training: tr.count ?? 0,
       });
       if (j.data && j.data[0]) setLatest(j.data[0] as any);
+      if (mvpRes.data && mvpRes.data[0]) setMvp(mvpRes.data[0] as any);
+
+      // Cover map (tournament_id → first cover or first photo)
+      const photoMap = new Map<string, string>();
+      const sorted = (photoRes.data ?? []).sort((a: any, b: any) =>
+        Number(b.is_cover) - Number(a.is_cover) || a.created_at.localeCompare(b.created_at)
+      );
+      sorted.forEach((p: any) => {
+        if (!photoMap.has(p.tournament_id)) photoMap.set(p.tournament_id, publicUrl(p.storage_path));
+      });
+
+      // Pathway: most recent 5 played, oldest first
+      const played = tournaments.filter((x) => !x.is_upcoming).slice(-5);
+      setPathway(played.map((x) => ({
+        id: x.id, name: x.name, stage: x.stage, date: x.date,
+        location: x.location, result: x.result,
+        cover: photoMap.get(x.id) ?? null,
+      })));
+
+      // Next upcoming
+      const upcoming = tournaments
+        .filter((x) => x.tip_off && new Date(x.tip_off).getTime() > Date.now())
+        .sort((a, b) => new Date(a.tip_off).getTime() - new Date(b.tip_off).getTime())[0];
+      if (upcoming) setNextGame({ name: upcoming.name, tip_off: upcoming.tip_off });
     });
   }, []);
 
   return (
     <div className="overflow-x-hidden">
-      {/* HERO */}
-      <section className="relative">
-        <div className="absolute inset-0 grain pointer-events-none" />
-        <BasketballSVG className="absolute -right-20 top-10 w-96 text-purple/10 animate-spin-slow hidden md:block" />
+      <CursorGlow tone="gold" />
 
-        <div className="max-w-7xl mx-auto px-6 lg:px-10 pt-10 lg:pt-16 pb-20 grid lg:grid-cols-12 gap-10 items-end relative">
+      {/* HERO — AURA MODE */}
+      <section className="relative bg-ink text-cream isolate">
+        <AuroraBackground />
+        <div className="absolute inset-0 grain opacity-[0.07] pointer-events-none" />
+
+        <div className="max-w-7xl mx-auto px-6 lg:px-10 pt-12 lg:pt-20 pb-24 grid lg:grid-cols-12 gap-10 items-center relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -78,36 +115,38 @@ function Home() {
             className="lg:col-span-7"
           >
             <div className="flex items-center gap-3 mb-6">
-              <span className="h-px w-12 bg-purple" />
-              <p className="eyebrow text-purple">No. 24 · Class of 2029 · Guard</p>
+              <span className="h-px w-12 bg-gold" />
+              <p className="eyebrow text-gold">No. 24 · Class of 2029 · Guard · LA Forever</p>
             </div>
-            <h1 className="display font-serif text-[clamp(3.5rem,12vw,10rem)] text-foreground">
-              Gobi.
-              <br />
-              <span className="italic text-purple">Built for</span>
-              <br />
-              <span className="text-stroke">the moment.</span>
+
+            <h1 className="display font-serif text-[clamp(3.5rem,12vw,11rem)] leading-[0.88]">
+              <span className="block gold-glow">Gobi.</span>
+              <span className="block italic text-cream/90">Built for</span>
+              <span className="block shine">the moment.</span>
             </h1>
-            <p className="mt-8 text-lg text-muted-foreground max-w-xl leading-relaxed">
-              National-level basketball player. Ninth-grade scholar. Future Ivy.
-              <br className="hidden sm:block" />
-              This is the notebook, the highlight reel, and the long game — all in one place.
+
+            <p className="mt-8 text-lg text-cream/75 max-w-xl leading-relaxed">
+              National-level basketball player. Ninth-grade scholar. Future Ivy. <br className="hidden sm:block" />
+              The notebook, the highlight reel, and the long game — all in one place.
             </p>
-            <div className="mt-10 flex flex-wrap gap-4">
-              <Link to="/tournaments" className="group inline-flex items-center gap-3 bg-foreground text-background px-7 py-4 text-sm tracking-wide hover:bg-purple transition-colors">
+
+            <div className="mt-10 flex flex-wrap gap-4 items-center">
+              <Link to="/tournaments" className="group inline-flex items-center gap-3 bg-gold text-gold-foreground px-7 py-4 text-sm tracking-wide hover:bg-cream transition-colors shadow-elegant">
                 See the season
                 <ArrowUpRight className="h-4 w-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
               </Link>
-              <Link to="/journal" className="inline-flex items-center gap-3 border border-foreground/30 px-7 py-4 text-sm tracking-wide hover:border-foreground transition-colors">
+              <Link to="/journal" className="inline-flex items-center gap-3 border border-cream/30 px-7 py-4 text-sm tracking-wide hover:border-gold hover:text-gold transition-colors">
                 Read the journal
               </Link>
+              {nextGame && <NextGameCountdown tipOff={nextGame.tip_off} name={nextGame.name} />}
             </div>
 
-            {/* Mini stats inline */}
-            <div className="mt-14 grid grid-cols-3 gap-6 max-w-md border-t border-border pt-6">
-              <MiniStat label="PPG" value={averages.ppg || "—"} />
-              <MiniStat label="RPG" value={averages.rpg || "—"} />
-              <MiniStat label="APG" value={averages.apg || "—"} />
+            {/* Mini live stats — count up */}
+            <div className="mt-14 grid grid-cols-4 gap-6 max-w-2xl border-t border-cream/15 pt-6">
+              <MiniStat label="PPG" value={<CountUp to={averages.ppg} decimals={1} />} accent />
+              <MiniStat label="RPG" value={<CountUp to={averages.rpg} decimals={1} />} />
+              <MiniStat label="APG" value={<CountUp to={averages.apg} decimals={1} />} />
+              <MiniStat label="Career PTS" value={<CountUp to={careerPoints} />} />
             </div>
           </motion.div>
 
@@ -117,34 +156,88 @@ function Home() {
             transition={{ duration: 1, delay: 0.2 }}
             className="lg:col-span-5 relative"
           >
+            {/* Glowing aura behind portrait */}
+            <div className="absolute -inset-8 bg-gradient-to-br from-purple via-gold/40 to-purple blur-3xl opacity-60 animate-glow-pop rounded-full" />
+
             <div className="relative aspect-[4/5] overflow-hidden bg-ink shadow-elegant">
               <img src={heroImg} alt="Gobi in her Lakers jersey holding a basketball" className="absolute inset-0 w-full h-full object-cover" width={1080} height={1350} />
-              <div className="absolute inset-x-0 bottom-0 p-6 bg-gradient-to-t from-ink/95 to-transparent">
+              <div className="absolute inset-x-0 bottom-0 p-6 bg-gradient-to-t from-ink/95 via-ink/60 to-transparent">
                 <p className="eyebrow text-gold">Cover Athlete · 2026</p>
                 <p className="font-serif text-cream text-2xl mt-1 italic">"The work is the reward."</p>
               </div>
-              <div className="absolute top-4 right-4 bg-cream/95 backdrop-blur px-3 py-2 text-xs eyebrow text-ink flex items-center gap-2">
-                <span className="h-1.5 w-1.5 rounded-full bg-destructive animate-pulse" /> LIVE
+              <div className="absolute top-4 right-4 glass-dark px-3 py-2 text-xs eyebrow text-cream flex items-center gap-2">
+                <span className="h-1.5 w-1.5 rounded-full bg-gold animate-pulse-ring" /> LIVE
               </div>
             </div>
-            <div className="absolute -top-4 -left-4 bg-gold text-gold-foreground px-4 py-2 eyebrow shadow-card hidden md:block rotate-[-3deg]">
-              Birthday Edition
-            </div>
+            <motion.div
+              initial={{ rotate: -3 }}
+              animate={{ rotate: [-3, 3, -3] }}
+              transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+              className="absolute -top-4 -left-4 bg-gold text-gold-foreground px-4 py-2 eyebrow shadow-card hidden md:block"
+            >
+              ✦ Birthday Edition ✦
+            </motion.div>
             <div className="absolute -bottom-6 -right-6 hidden md:flex items-center justify-center w-28 h-28 rounded-full bg-purple text-cream animate-spin-slow">
               <span className="font-serif text-xs tracking-[0.3em]">· GOBI · 24 · GOBI · 24 ·</span>
             </div>
+            <BasketballSVG className="absolute -bottom-8 -left-10 w-24 text-gold animate-ball-bounce hidden lg:block" />
           </motion.div>
+        </div>
+
+        {/* Quote rotator strip */}
+        <div className="relative z-10 border-t border-cream/10">
+          <div className="max-w-7xl mx-auto px-6 lg:px-10 py-12 grid md:grid-cols-12 gap-8 items-center">
+            <div className="md:col-span-3 flex items-center gap-3">
+              <Sparkles className="h-5 w-5 text-gold" />
+              <p className="eyebrow text-gold">Daily Fuel</p>
+            </div>
+            <div className="md:col-span-9">
+              <QuoteRotator className="text-cream" />
+            </div>
+          </div>
         </div>
       </section>
 
       {/* MARQUEE */}
       <Marquee items={MARQUEE} accent="ink" />
 
+      {/* MVP MOMENT — only if a photo is starred */}
+      {mvp && (
+        <section className="bg-ink text-cream relative overflow-hidden">
+          <div className="absolute inset-0 grain opacity-10" />
+          <div className="aura-blob gold animate-aurora-2" style={{ width: 500, height: 500, top: "20%", right: "5%", opacity: 0.4 }} />
+          <div className="max-w-7xl mx-auto px-6 lg:px-10 py-20 grid lg:grid-cols-12 gap-10 items-center relative">
+            <div className="lg:col-span-7 relative">
+              <div className="absolute -top-6 -left-6 bg-gold text-gold-foreground px-4 py-2 eyebrow z-10 rotate-[-3deg]">
+                <Zap className="inline h-3 w-3 mr-1.5" /> MVP Moment
+              </div>
+              <div className="aspect-[16/10] overflow-hidden shadow-elegant">
+                <img src={publicUrl(mvp.storage_path)} alt={mvp.caption ?? "MVP moment"} className="w-full h-full object-cover" />
+              </div>
+            </div>
+            <div className="lg:col-span-5">
+              <p className="eyebrow text-gold">The frame</p>
+              <h2 className="font-serif text-4xl md:text-6xl mt-3 italic leading-tight">
+                {mvp.caption ?? "The shot that mattered."}
+              </h2>
+              {mvp.tournament && (
+                <>
+                  <div className="mt-6 rule" />
+                  <p className="mt-6 eyebrow text-cream/60">{mvp.tournament.name}</p>
+                  <p className="font-serif text-2xl mt-1">{mvp.tournament.result ?? "—"}</p>
+                  {mvp.tournament.date && <p className="text-sm text-cream/60 mt-1">{new Date(mvp.tournament.date).toLocaleDateString("en", { month: "long", day: "numeric", year: "numeric" })}</p>}
+                </>
+              )}
+            </div>
+          </div>
+        </section>
+      )}
+
       {/* SEASON SNAPSHOT */}
       <section className="max-w-7xl mx-auto px-6 lg:px-10 py-24">
         <div className="grid lg:grid-cols-12 gap-10 items-end mb-14">
           <div className="lg:col-span-7">
-            <p className="eyebrow text-muted-foreground mb-3">The Tale of the Tape</p>
+            <p className="eyebrow text-purple mb-3">The Tale of the Tape</p>
             <h2 className="font-serif text-5xl md:text-7xl leading-[0.95]">
               By the <span className="italic text-purple">numbers.</span>
             </h2>
@@ -162,13 +255,39 @@ function Home() {
         </div>
       </section>
 
+      {/* PATHWAY TEASER */}
+      {pathway.length > 0 && (
+        <section className="bg-gradient-to-b from-background to-secondary/40 relative">
+          <div className="max-w-7xl mx-auto px-6 lg:px-10 py-24">
+            <div className="grid lg:grid-cols-12 gap-10 items-end mb-16">
+              <div className="lg:col-span-8">
+                <p className="eyebrow text-purple mb-3">The Road So Far</p>
+                <h2 className="font-serif text-5xl md:text-7xl leading-[0.95]">
+                  The <span className="italic text-purple">pathway.</span>
+                </h2>
+              </div>
+              <p className="lg:col-span-4 text-muted-foreground leading-relaxed">
+                District. State. Nationals. Showcases. Every stop on the road from Bangalore courts to the Ivy League gym.
+              </p>
+            </div>
+            <Pathway stops={pathway} />
+            <div className="mt-12 text-center">
+              <Link to="/tournaments" className="inline-flex items-center gap-2 eyebrow text-purple hover:text-foreground">
+                See every stop · bracket + galleries <ArrowUpRight className="h-4 w-4" />
+              </Link>
+            </div>
+          </div>
+        </section>
+      )}
+
       {/* PRINCIPLES MANIFESTO */}
       <section className="bg-ink text-cream relative overflow-hidden">
         <div className="absolute inset-0 grain opacity-10" />
+        <div className="aura-blob purple animate-aurora" style={{ width: 600, height: 600, top: "-10%", left: "10%", opacity: 0.3 }} />
         <div className="max-w-7xl mx-auto px-6 lg:px-10 py-24 lg:py-32 relative">
           <p className="eyebrow text-gold mb-6">The Code · Mamba Rules</p>
           <h2 className="font-serif text-5xl md:text-8xl leading-[0.92] max-w-5xl">
-            Four rules. <span className="italic text-gold">No exceptions.</span>
+            Four rules. <span className="italic text-gold gold-glow">No exceptions.</span>
           </h2>
           <div className="mt-16 grid md:grid-cols-2 gap-px bg-cream/15">
             {PRINCIPLES.map((p) => (
@@ -178,7 +297,7 @@ function Home() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-50px" }}
                 transition={{ duration: 0.6 }}
-                className="bg-ink p-8 md:p-12 group"
+                className="bg-ink p-8 md:p-12 group hover:bg-gradient-to-br hover:from-ink hover:to-purple/30 transition-all"
               >
                 <p className="font-serif text-6xl text-gold/60 group-hover:text-gold transition-colors">{p.n}</p>
                 <h3 className="font-serif text-3xl mt-4 italic">{p.t}</h3>
@@ -189,7 +308,7 @@ function Home() {
         </div>
       </section>
 
-      {/* FEATURED JOURNAL + IMAGE */}
+      {/* FEATURED JOURNAL */}
       <section className="max-w-7xl mx-auto px-6 lg:px-10 py-24 grid lg:grid-cols-12 gap-12 items-center">
         <div className="lg:col-span-5 relative">
           <div className="aspect-[4/5] overflow-hidden bg-ink stripe-bg">
@@ -227,14 +346,14 @@ function Home() {
         </div>
       </section>
 
-      {/* QUICK LINKS — magazine cards */}
+      {/* QUICK LINKS */}
       <section className="max-w-7xl mx-auto px-6 lg:px-10 pb-24">
         <div className="flex items-end justify-between mb-10">
           <h2 className="font-serif text-4xl md:text-6xl">The sections.</h2>
           <p className="eyebrow text-muted-foreground hidden md:block">Pick a chapter</p>
         </div>
         <div className="grid lg:grid-cols-3 gap-6">
-          <FeatureCard to="/tournaments" eyebrow="On the court" title="Tournament reviews" body="Every game charted. Box scores, results, and the story behind them." />
+          <FeatureCard to="/tournaments" eyebrow="On the court" title="Tournament reviews" body="Every game charted. Box scores, results, photo galleries, the bracket." />
           <FeatureCard to="/training" eyebrow="In the gym" title="Training log" body="Daily reps, weekly heat-map, and the streak that doesn't break." />
           <FeatureCard to="/college" eyebrow="The long game" title="College notebook" body="Ivy, Top 20, dream schools. Visits, deadlines, and the why behind each." />
           <FeatureCard to="/competitions" eyebrow="Stage-ready" title="Competitions" body="Showcases, AAU brackets, scholarships. The pipeline that gets you seen." />
@@ -252,7 +371,7 @@ function Home() {
         <div className="relative max-w-7xl mx-auto px-6 lg:px-10 py-32 lg:py-40 text-cream">
           <Flame className="h-10 w-10 text-gold mb-6" />
           <h2 className="font-serif text-4xl md:text-7xl max-w-4xl leading-[1.05]">
-            "Heroes come and go, <span className="italic text-gold">but legends are forever.</span>"
+            "Heroes come and go, <span className="italic text-gold gold-glow">but legends are forever.</span>"
           </h2>
           <p className="eyebrow text-cream/60 mt-8">— Kobe Bryant · taped above the desk</p>
 
@@ -266,11 +385,11 @@ function Home() {
   );
 }
 
-function MiniStat({ label, value }: { label: string; value: number | string }) {
+function MiniStat({ label, value, accent }: { label: string; value: React.ReactNode; accent?: boolean }) {
   return (
     <div>
-      <p className="font-serif text-4xl text-foreground">{value}</p>
-      <p className="eyebrow text-muted-foreground mt-1">{label}</p>
+      <p className={`font-serif text-4xl tabular-nums ${accent ? "text-gold gold-glow" : "text-cream"}`}>{value}</p>
+      <p className="eyebrow text-cream/60 mt-1">{label}</p>
     </div>
   );
 }
@@ -282,7 +401,9 @@ function StatCard({ icon, label, value, to }: { icon: React.ReactNode; label: st
         {icon}
         <ArrowUpRight className="h-4 w-4 opacity-0 group-hover:opacity-100 transition-opacity" />
       </div>
-      <p className="font-serif text-6xl mt-6 text-foreground">{value.toString().padStart(2, "0")}</p>
+      <p className="font-serif text-6xl mt-6 text-foreground tabular-nums">
+        <CountUp to={value} />
+      </p>
       <p className="eyebrow text-muted-foreground mt-2">{label}</p>
       <div className="absolute -bottom-6 -right-6 w-20 h-1 bg-purple opacity-0 group-hover:opacity-100 group-hover:w-full transition-all duration-500" />
     </Link>
