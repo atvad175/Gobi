@@ -187,3 +187,99 @@
     color-mix(in oklab, var(--purple) 8%, transparent) 16px
   );
 }
+
+/* AURA — animated gradients, glows, blobs */
+@keyframes aurora-drift {
+  0%   { transform: translate3d(-10%, -8%, 0) scale(1);   }
+  50%  { transform: translate3d(12%, 8%, 0)  scale(1.15); }
+  100% { transform: translate3d(-10%, -8%, 0) scale(1);   }
+}
+@keyframes aurora-drift-2 {
+  0%   { transform: translate3d(15%, 10%, 0) scale(1.1); }
+  50%  { transform: translate3d(-12%, -6%, 0) scale(1);  }
+  100% { transform: translate3d(15%, 10%, 0) scale(1.1); }
+}
+@keyframes hue-shift {
+  0%   { filter: hue-rotate(0deg); }
+  100% { filter: hue-rotate(40deg); }
+}
+@keyframes pulse-ring {
+  0%   { box-shadow: 0 0 0 0 color-mix(in oklab, var(--gold) 60%, transparent); }
+  70%  { box-shadow: 0 0 0 18px color-mix(in oklab, var(--gold) 0%, transparent); }
+  100% { box-shadow: 0 0 0 0 color-mix(in oklab, var(--gold) 0%, transparent); }
+}
+@keyframes glow-pop {
+  0%, 100% { opacity: 0.55; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.05); }
+}
+
+.animate-aurora { animation: aurora-drift 22s ease-in-out infinite; }
+.animate-aurora-2 { animation: aurora-drift-2 28s ease-in-out infinite; }
+.animate-pulse-ring { animation: pulse-ring 2s cubic-bezier(0.4,0,0.6,1) infinite; }
+.animate-glow-pop { animation: glow-pop 4s ease-in-out infinite; }
+
+.aura-blob {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(80px);
+  opacity: 0.65;
+  pointer-events: none;
+  mix-blend-mode: screen;
+}
+.aura-blob.purple { background: radial-gradient(circle, var(--purple), transparent 70%); }
+.aura-blob.gold   { background: radial-gradient(circle, var(--gold), transparent 70%); }
+.aura-blob.violet { background: radial-gradient(circle, oklch(0.55 0.25 295), transparent 70%); }
+
+.cursor-glow {
+  position: fixed;
+  pointer-events: none;
+  z-index: 5;
+  width: 480px;
+  height: 480px;
+  border-radius: 9999px;
+  background: radial-gradient(circle, color-mix(in oklab, var(--gold) 35%, transparent), transparent 60%);
+  filter: blur(40px);
+  transform: translate(-50%, -50%);
+  transition: opacity 0.3s ease;
+  mix-blend-mode: multiply;
+}
+.dark .cursor-glow,
+.bg-ink .cursor-glow {
+  mix-blend-mode: screen;
+}
+
+/* Glass card */
+.glass {
+  background: color-mix(in oklab, var(--cream) 60%, transparent);
+  backdrop-filter: blur(14px);
+  border: 1px solid color-mix(in oklab, var(--ink) 10%, transparent);
+}
+.glass-dark {
+  background: color-mix(in oklab, var(--ink) 55%, transparent);
+  backdrop-filter: blur(14px);
+  border: 1px solid color-mix(in oklab, var(--cream) 14%, transparent);
+}
+
+/* Gold underline glow */
+.gold-glow {
+  text-shadow: 0 0 30px color-mix(in oklab, var(--gold) 60%, transparent);
+}
+.purple-glow {
+  text-shadow: 0 0 40px color-mix(in oklab, var(--purple) 70%, transparent);
+}
+
+/* Pathway dotted line */
+.pathway-line {
+  background-image: linear-gradient(to bottom, var(--purple) 50%, transparent 50%);
+  background-size: 2px 12px;
+  background-repeat: repeat-y;
+}
+
+/* Court glow */
+.court-grid {
+  background-image:
+    linear-gradient(color-mix(in oklab, var(--gold) 25%, transparent) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in oklab, var(--gold) 25%, transparent) 1px, transparent 1px);
+  background-size: 60px 60px;
+  mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
+}
