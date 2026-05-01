@@ -364,6 +364,85 @@ function Home() {
         </div>
       </section>
 
+      {/* DREAM BOARD */}
+      <section className="bg-gradient-to-b from-secondary/40 to-background relative overflow-hidden">
+        <div className="aura-blob purple animate-aurora" style={{ width: 500, height: 500, top: "-10%", right: "-5%", opacity: 0.25 }} />
+        <div className="max-w-7xl mx-auto px-6 lg:px-10 py-24 relative">
+          <div className="grid lg:grid-cols-12 gap-10 items-end mb-14">
+            <div className="lg:col-span-7">
+              <p className="eyebrow text-purple mb-3">Manifesting · Out loud · On purpose</p>
+              <h2 className="font-serif text-5xl md:text-7xl leading-[0.95]">
+                The dream <span className="italic text-purple">board.</span>
+              </h2>
+            </div>
+            <p className="lg:col-span-5 text-muted-foreground leading-relaxed">
+              Loud goals. Specific dreams. The stuff I want so bad it's basically already mine. Receipts coming.
+            </p>
+          </div>
+          <div className="grid md:grid-cols-3 lg:grid-cols-4 gap-4">
+            {[
+              { tag: "School", goal: "Duke. Cameron Crazies. K Court." , vibe: "purple" },
+              { tag: "On court", goal: "First in-game dunk", vibe: "gold" },
+              { tag: "Read", goal: "Finish Atomic Habits → live it", vibe: "ink" },
+              { tag: "Stage", goal: "National MVP — and mean it", vibe: "purple" },
+              { tag: "Off court", goal: "Win pickleball doubles 🏓", vibe: "gold" },
+              { tag: "Family", goal: "Make Nikash proud (he won't admit it)", vibe: "ink" },
+              { tag: "Style", goal: "Custom No. 24 signature shoe", vibe: "purple" },
+              { tag: "Travel", goal: "Practice at Staples. Touch the floor.", vibe: "gold" },
+            ].map((d, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 20, rotate: 0 }}
+                whileInView={{ opacity: 1, y: 0, rotate: i % 2 ? 1.2 : -1.2 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: i * 0.05 }}
+                whileHover={{ rotate: 0, scale: 1.03 }}
+                className={`p-6 shadow-card border ${
+                  d.vibe === "purple" ? "bg-purple text-cream border-purple" :
+                  d.vibe === "gold" ? "bg-gold text-ink border-gold" :
+                  "bg-ink text-cream border-ink"
+                }`}
+              >
+                <p className="eyebrow opacity-70">{d.tag}</p>
+                <p className="font-serif text-2xl mt-3 italic leading-tight">{d.goal}</p>
+              </motion.div>
+            ))}
+          </div>
+          <p className="mt-10 text-center eyebrow text-muted-foreground">
+            ✦ Pinned above the desk · updated whenever the universe ships ✦
+          </p>
+        </div>
+      </section>
+
+      {/* LETTER TO FUTURE SELF */}
+      <section className="bg-cream relative overflow-hidden">
+        <div className="absolute inset-0 stripe-bg opacity-40" />
+        <div className="max-w-4xl mx-auto px-6 lg:px-10 py-24 relative">
+          <div className="text-center mb-10">
+            <p className="eyebrow text-purple">Sealed · Open at graduation</p>
+            <h2 className="font-serif text-5xl md:text-7xl mt-3 italic">Dear future Aanya,</h2>
+          </div>
+          <div className="bg-background border border-border shadow-elegant p-8 md:p-14 relative rotate-[-0.5deg]">
+            <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-gold text-ink px-6 py-1 eyebrow shadow-card">
+              ✦ from 9th grade Gobi ✦
+            </div>
+            <div className="font-serif text-xl md:text-2xl leading-[1.7] text-foreground/90 space-y-5 italic">
+              <p>If you're reading this in a Duke hoodie — I knew it. If it's Harvard crimson — also lit. If it's neither, you better have a <span className="not-italic text-purple">very</span> good story.</p>
+              <p>Did you ever dunk? Did you finish Atomic Habits or just keep restarting chapter 1? Is Nikash still annoying? (Be nice. Mostly.)</p>
+              <p>Remember the bumpy car rides to practice, the timetables nobody asked you to make, the pickleball games at 6 AM. That girl built you. Don't forget her.</p>
+              <p>The work is the reward. The Lakers will win another one. And you — you were always meant for the moment.</p>
+            </div>
+            <div className="mt-10 flex items-end justify-between">
+              <div>
+                <img src={signature} alt="Gobi signature" loading="lazy" className="h-16 w-auto opacity-90" width={1024} height={512} />
+                <p className="eyebrow text-purple mt-2">Aanya "Gobi" · age 14</p>
+              </div>
+              <p className="eyebrow text-muted-foreground hidden md:block">Class of 2029 · Birthday Edition</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* PARALLAX QUOTE */}
       <section className="relative">
         <div className="absolute inset-0">
@@ -375,11 +454,11 @@ function Home() {
           <h2 className="font-serif text-4xl md:text-7xl max-w-4xl leading-[1.05]">
             "Heroes come and go, <span className="italic text-gold gold-glow">but legends are forever.</span>"
           </h2>
-          <p className="eyebrow text-cream/60 mt-8">— Kobe Bryant · taped above the desk</p>
+          <p className="eyebrow text-cream/60 mt-8">— Kobe · taped above Aanya's desk, right next to the timetable</p>
 
           <div className="mt-16 max-w-md">
             <img src={signature} alt="Gobi signature" loading="lazy" className="h-20 w-auto invert opacity-90" width={1024} height={512} />
-            <p className="eyebrow text-gold mt-2">Always working · 2026</p>
+            <p className="eyebrow text-gold mt-2">Aanya "Gobi" · always working · 2026</p>
           </div>
         </div>
       </section>
