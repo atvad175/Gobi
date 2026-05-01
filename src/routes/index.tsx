@@ -118,18 +118,18 @@ function Home() {
           >
             <div className="flex items-center gap-3 mb-6">
               <span className="h-px w-12 bg-gold" />
-              <p className="eyebrow text-gold">No. 24 · Class of 2029 · Guard · LA Forever</p>
+              <p className="eyebrow text-gold">Aanya · aka Gobi · No. 24 · Class of 2029 · Duke Bound</p>
             </div>
 
             <h1 className="display font-serif text-[clamp(3.5rem,12vw,11rem)] leading-[0.88]">
               <span className="block gold-glow">Gobi.</span>
-              <span className="block italic text-cream/90">Built for</span>
-              <span className="block shine">the moment.</span>
+              <span className="block italic text-cream/90">Meanie on the court,</span>
+              <span className="block shine">scholar off it.</span>
             </h1>
 
             <p className="mt-8 text-lg text-cream/75 max-w-xl leading-relaxed">
-              National-level basketball player. Ninth-grade scholar. Future Ivy. <br className="hidden sm:block" />
-              The notebook, the highlight reel, and the long game — all in one place.
+              Hi, I'm <span className="text-gold">Aanya</span> — but everyone calls me Gobi. National hooper, 9th-grade overthinker, future <span className="italic text-gold">Duke Blue Devil</span> (or Ivy, we'll see who wants me more). <br className="hidden sm:block" />
+              This is my notebook, my highlight reel, and my receipts — all in one place.
             </p>
 
             <div className="mt-10 flex flex-wrap gap-4 items-center">
