@@ -20,15 +20,17 @@ import { publicUrl } from "@/components/PhotoUpload";
 export const Route = createFileRoute("/")({ component: Home });
 
 const MARQUEE = [
-  "Hooper", "Scholar", "Future Ivy", "No. 24",
-  "Mamba Mentality", "Forever Lakers", "Class of 2029",
+  "Aanya", "aka Gobi", "Meanie", "Duke Bound",
+  "Atomic Habits", "Forever Lakers", "Pickleball Champ",
+  "Can't Dunk… yet", "Class of 2029", "Bumpy Kars Crew",
+  "Timetable Tyrant", "Nikash's Big Sis Energy",
 ];
 
 const PRINCIPLES = [
-  { n: "01", t: "The work is the reward.", b: "Reps before rings. The score takes care of itself." },
-  { n: "02", t: "Mind sharper than the body.", b: "Film, books, journals. Game IQ is a daily deposit." },
-  { n: "03", t: "Detail is destiny.", b: "Footwork, follow-through, free throws. The boring stuff wins games." },
-  { n: "04", t: "Be the one they trust.", b: "Last shot, last possession, last to leave the gym." },
+  { n: "01", t: "1% better. Every single day.", b: "Atomic Habits in the gym, in the books, in the kitchen. Compound the small stuff." },
+  { n: "02", t: "Timetables aren't cute. They're cheat codes.", b: "Plan the week like a coach plans a playoff run. Then run the play." },
+  { n: "03", t: "Can't dunk yet ≠ won't dunk ever.", b: "Today's ceiling is tomorrow's floor. Keep stacking inches — vertical, GPA, life." },
+  { n: "04", t: "Be the one Nikash brags about.", b: "Little brothers are watching. Big sisters set the tone. Show up loud." },
 ];
 
 type MVP = { id: string; tournament_id: string; storage_path: string; caption: string | null; tournament: { name: string; date: string | null; result: string | null } | null };
@@ -116,18 +118,18 @@ function Home() {
           >
             <div className="flex items-center gap-3 mb-6">
               <span className="h-px w-12 bg-gold" />
-              <p className="eyebrow text-gold">No. 24 · Class of 2029 · Guard · LA Forever</p>
+              <p className="eyebrow text-gold">Aanya · aka Gobi · No. 24 · Class of 2029 · Duke Bound</p>
             </div>
 
             <h1 className="display font-serif text-[clamp(3.5rem,12vw,11rem)] leading-[0.88]">
               <span className="block gold-glow">Gobi.</span>
-              <span className="block italic text-cream/90">Built for</span>
-              <span className="block shine">the moment.</span>
+              <span className="block italic text-cream/90">Meanie on the court,</span>
+              <span className="block shine">scholar off it.</span>
             </h1>
 
             <p className="mt-8 text-lg text-cream/75 max-w-xl leading-relaxed">
-              National-level basketball player. Ninth-grade scholar. Future Ivy. <br className="hidden sm:block" />
-              The notebook, the highlight reel, and the long game — all in one place.
+              Hi, I'm <span className="text-gold">Aanya</span> — but everyone calls me Gobi. National hooper, 9th-grade overthinker, future <span className="italic text-gold">Duke Blue Devil</span> (or Ivy, we'll see who wants me more). <br className="hidden sm:block" />
+              This is my notebook, my highlight reel, and my receipts — all in one place.
             </p>
 
             <div className="mt-10 flex flex-wrap gap-4 items-center">
@@ -162,8 +164,8 @@ function Home() {
             <div className="relative aspect-[4/5] overflow-hidden bg-ink shadow-elegant">
               <img src={heroImg} alt="Gobi in her Lakers jersey holding a basketball" className="absolute inset-0 w-full h-full object-cover" width={1080} height={1350} />
               <div className="absolute inset-x-0 bottom-0 p-6 bg-gradient-to-t from-ink/95 via-ink/60 to-transparent">
-                <p className="eyebrow text-gold">Cover Athlete · 2026</p>
-                <p className="font-serif text-cream text-2xl mt-1 italic">"The work is the reward."</p>
+                <p className="eyebrow text-gold">Cover Athlete · Birthday Edition</p>
+                <p className="font-serif text-cream text-2xl mt-1 italic">"Can't dunk yet. Still your problem."</p>
               </div>
               <div className="absolute top-4 right-4 glass-dark px-3 py-2 text-xs eyebrow text-cream flex items-center gap-2">
                 <span className="h-1.5 w-1.5 rounded-full bg-gold animate-pulse-ring" /> LIVE
@@ -362,6 +364,85 @@ function Home() {
         </div>
       </section>
 
+      {/* DREAM BOARD */}
+      <section className="bg-gradient-to-b from-secondary/40 to-background relative overflow-hidden">
+        <div className="aura-blob purple animate-aurora" style={{ width: 500, height: 500, top: "-10%", right: "-5%", opacity: 0.25 }} />
+        <div className="max-w-7xl mx-auto px-6 lg:px-10 py-24 relative">
+          <div className="grid lg:grid-cols-12 gap-10 items-end mb-14">
+            <div className="lg:col-span-7">
+              <p className="eyebrow text-purple mb-3">Manifesting · Out loud · On purpose</p>
+              <h2 className="font-serif text-5xl md:text-7xl leading-[0.95]">
+                The dream <span className="italic text-purple">board.</span>
+              </h2>
+            </div>
+            <p className="lg:col-span-5 text-muted-foreground leading-relaxed">
+              Loud goals. Specific dreams. The stuff I want so bad it's basically already mine. Receipts coming.
+            </p>
+          </div>
+          <div className="grid md:grid-cols-3 lg:grid-cols-4 gap-4">
+            {[
+              { tag: "School", goal: "Duke. Cameron Crazies. K Court." , vibe: "purple" },
+              { tag: "On court", goal: "First in-game dunk", vibe: "gold" },
+              { tag: "Read", goal: "Finish Atomic Habits → live it", vibe: "ink" },
+              { tag: "Stage", goal: "National MVP — and mean it", vibe: "purple" },
+              { tag: "Off court", goal: "Win pickleball doubles 🏓", vibe: "gold" },
+              { tag: "Family", goal: "Make Nikash proud (he won't admit it)", vibe: "ink" },
+              { tag: "Style", goal: "Custom No. 24 signature shoe", vibe: "purple" },
+              { tag: "Travel", goal: "Practice at Staples. Touch the floor.", vibe: "gold" },
+            ].map((d, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 20, rotate: 0 }}
+                whileInView={{ opacity: 1, y: 0, rotate: i % 2 ? 1.2 : -1.2 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: i * 0.05 }}
+                whileHover={{ rotate: 0, scale: 1.03 }}
+                className={`p-6 shadow-card border ${
+                  d.vibe === "purple" ? "bg-purple text-cream border-purple" :
+                  d.vibe === "gold" ? "bg-gold text-ink border-gold" :
+                  "bg-ink text-cream border-ink"
+                }`}
+              >
+                <p className="eyebrow opacity-70">{d.tag}</p>
+                <p className="font-serif text-2xl mt-3 italic leading-tight">{d.goal}</p>
+              </motion.div>
+            ))}
+          </div>
+          <p className="mt-10 text-center eyebrow text-muted-foreground">
+            ✦ Pinned above the desk · updated whenever the universe ships ✦
+          </p>
+        </div>
+      </section>
+
+      {/* LETTER TO FUTURE SELF */}
+      <section className="bg-cream relative overflow-hidden">
+        <div className="absolute inset-0 stripe-bg opacity-40" />
+        <div className="max-w-4xl mx-auto px-6 lg:px-10 py-24 relative">
+          <div className="text-center mb-10">
+            <p className="eyebrow text-purple">Sealed · Open at graduation</p>
+            <h2 className="font-serif text-5xl md:text-7xl mt-3 italic">Dear future Aanya,</h2>
+          </div>
+          <div className="bg-background border border-border shadow-elegant p-8 md:p-14 relative rotate-[-0.5deg]">
+            <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-gold text-ink px-6 py-1 eyebrow shadow-card">
+              ✦ from 9th grade Gobi ✦
+            </div>
+            <div className="font-serif text-xl md:text-2xl leading-[1.7] text-foreground/90 space-y-5 italic">
+              <p>If you're reading this in a Duke hoodie — I knew it. If it's Harvard crimson — also lit. If it's neither, you better have a <span className="not-italic text-purple">very</span> good story.</p>
+              <p>Did you ever dunk? Did you finish Atomic Habits or just keep restarting chapter 1? Is Nikash still annoying? (Be nice. Mostly.)</p>
+              <p>Remember the bumpy car rides to practice, the timetables nobody asked you to make, the pickleball games at 6 AM. That girl built you. Don't forget her.</p>
+              <p>The work is the reward. The Lakers will win another one. And you — you were always meant for the moment.</p>
+            </div>
+            <div className="mt-10 flex items-end justify-between">
+              <div>
+                <img src={signature} alt="Gobi signature" loading="lazy" className="h-16 w-auto opacity-90" width={1024} height={512} />
+                <p className="eyebrow text-purple mt-2">Aanya "Gobi" · age 14</p>
+              </div>
+              <p className="eyebrow text-muted-foreground hidden md:block">Class of 2029 · Birthday Edition</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* PARALLAX QUOTE */}
       <section className="relative">
         <div className="absolute inset-0">
@@ -373,11 +454,11 @@ function Home() {
           <h2 className="font-serif text-4xl md:text-7xl max-w-4xl leading-[1.05]">
             "Heroes come and go, <span className="italic text-gold gold-glow">but legends are forever.</span>"
           </h2>
-          <p className="eyebrow text-cream/60 mt-8">— Kobe Bryant · taped above the desk</p>
+          <p className="eyebrow text-cream/60 mt-8">— Kobe · taped above Aanya's desk, right next to the timetable</p>
 
           <div className="mt-16 max-w-md">
             <img src={signature} alt="Gobi signature" loading="lazy" className="h-20 w-auto invert opacity-90" width={1024} height={512} />
-            <p className="eyebrow text-gold mt-2">Always working · 2026</p>
+            <p className="eyebrow text-gold mt-2">Aanya "Gobi" · always working · 2026</p>
           </div>
         </div>
       </section>

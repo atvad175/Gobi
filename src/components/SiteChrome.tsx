@@ -121,11 +121,12 @@ export function SiteFooter() {
       <div className="max-w-7xl mx-auto px-6 lg:px-10 py-20">
         <div className="grid md:grid-cols-12 gap-10">
           <div className="md:col-span-5">
-            <p className="font-serif text-7xl italic">Gobi.</p>
+            <p className="font-serif text-7xl italic">Aanya.</p>
+            <p className="eyebrow text-gold mt-2">aka Gobi · No. 24</p>
             <p className="text-sm text-cream/70 mt-4 max-w-md leading-relaxed">
-              Hooper. Student. Scholar in training. Built in the gym, sharpened in the library, born for the moment. Forever a Laker.
+              9th-grade hooper. Meanie on the court, Atomic Habits in the bag, Duke on the vision board. Big sis to Nikash, pickleball menace, timetable enthusiast. Forever a Laker.
             </p>
-            <p className="mt-8 eyebrow text-gold">Crafted with love · Birthday Edition · 2026</p>
+            <p className="mt-8 eyebrow text-gold">Built with love · Birthday Edition · 2026</p>
           </div>
           <div className="md:col-span-3">
             <p className="eyebrow text-gold mb-4">Explore</p>
@@ -140,12 +141,14 @@ export function SiteFooter() {
             <p className="font-serif text-2xl">LeBron James</p>
             <p className="text-xs text-cream/60 mb-4">Relentlessness · Longevity · Leadership</p>
             <p className="font-serif text-2xl">Kobe Bryant</p>
-            <p className="text-xs text-cream/60">Mamba Mentality · Detail · Hunger</p>
+            <p className="text-xs text-cream/60 mb-4">Mamba Mentality · Detail · Hunger</p>
+            <p className="font-serif text-2xl">Atomic Habits</p>
+            <p className="text-xs text-cream/60">1% better. Every. Single. Day.</p>
           </div>
         </div>
         <div className="mt-16 pt-8 border-t border-cream/15 flex flex-col md:flex-row justify-between gap-4 text-xs text-cream/50 eyebrow">
-          <span>© 2026 Gobi · All rights reserved</span>
-          <span>"Hard work beats talent when talent doesn't work hard."</span>
+          <span>© 2026 Aanya "Gobi" · All rights reserved</span>
+          <span>"Can't dunk yet. Still your problem."</span>
         </div>
       </div>
     </footer>
