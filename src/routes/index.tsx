@@ -324,6 +324,9 @@ function Home() {
         </div>
       </section>
 
+      {/* ACHIEVEMENTS */}
+      <Achievements />
+
       {/* FEATURED JOURNAL */}
       <section className="max-w-7xl mx-auto px-6 lg:px-10 py-24 grid lg:grid-cols-12 gap-12 items-center">
         <div className="lg:col-span-5 relative">
