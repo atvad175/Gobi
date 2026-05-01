@@ -164,8 +164,8 @@ function Home() {
             <div className="relative aspect-[4/5] overflow-hidden bg-ink shadow-elegant">
               <img src={heroImg} alt="Gobi in her Lakers jersey holding a basketball" className="absolute inset-0 w-full h-full object-cover" width={1080} height={1350} />
               <div className="absolute inset-x-0 bottom-0 p-6 bg-gradient-to-t from-ink/95 via-ink/60 to-transparent">
-                <p className="eyebrow text-gold">Cover Athlete · 2026</p>
-                <p className="font-serif text-cream text-2xl mt-1 italic">"The work is the reward."</p>
+                <p className="eyebrow text-gold">Cover Athlete · Birthday Edition</p>
+                <p className="font-serif text-cream text-2xl mt-1 italic">"Can't dunk yet. Still your problem."</p>
               </div>
               <div className="absolute top-4 right-4 glass-dark px-3 py-2 text-xs eyebrow text-cream flex items-center gap-2">
                 <span className="h-1.5 w-1.5 rounded-full bg-gold animate-pulse-ring" /> LIVE
