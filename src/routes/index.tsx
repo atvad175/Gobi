@@ -16,6 +16,11 @@ import { QuoteRotator } from "@/components/QuoteRotator";
 import { NextGameCountdown } from "@/components/NextGameCountdown";
 import { Pathway, PathStop } from "@/components/Pathway";
 import { publicUrl } from "@/components/PhotoUpload";
+import { SplitsPanel } from "@/components/SplitsPanel";
+import { Timeline } from "@/components/Timeline";
+import { HypePlaylist } from "@/components/HypePlaylist";
+import { Testimonials } from "@/components/Testimonials";
+import { Achievements } from "@/components/Achievements";
 
 export const Route = createFileRoute("/")({ component: Home });
 
