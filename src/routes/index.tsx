@@ -20,15 +20,17 @@ import { publicUrl } from "@/components/PhotoUpload";
 export const Route = createFileRoute("/")({ component: Home });
 
 const MARQUEE = [
-  "Hooper", "Scholar", "Future Ivy", "No. 24",
-  "Mamba Mentality", "Forever Lakers", "Class of 2029",
+  "Aanya", "aka Gobi", "Meanie", "Duke Bound",
+  "Atomic Habits", "Forever Lakers", "Pickleball Champ",
+  "Can't Dunk… yet", "Class of 2029", "Bumpy Kars Crew",
+  "Timetable Tyrant", "Nikash's Big Sis Energy",
 ];
 
 const PRINCIPLES = [
-  { n: "01", t: "The work is the reward.", b: "Reps before rings. The score takes care of itself." },
-  { n: "02", t: "Mind sharper than the body.", b: "Film, books, journals. Game IQ is a daily deposit." },
-  { n: "03", t: "Detail is destiny.", b: "Footwork, follow-through, free throws. The boring stuff wins games." },
-  { n: "04", t: "Be the one they trust.", b: "Last shot, last possession, last to leave the gym." },
+  { n: "01", t: "1% better. Every single day.", b: "Atomic Habits in the gym, in the books, in the kitchen. Compound the small stuff." },
+  { n: "02", t: "Timetables aren't cute. They're cheat codes.", b: "Plan the week like a coach plans a playoff run. Then run the play." },
+  { n: "03", t: "Can't dunk yet ≠ won't dunk ever.", b: "Today's ceiling is tomorrow's floor. Keep stacking inches — vertical, GPA, life." },
+  { n: "04", t: "Be the one Nikash brags about.", b: "Little brothers are watching. Big sisters set the tone. Show up loud." },
 ];
 
 type MVP = { id: string; tournament_id: string; storage_path: string; caption: string | null; tournament: { name: string; date: string | null; result: string | null } | null };
