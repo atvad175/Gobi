@@ -22,7 +22,7 @@ export const Route = createFileRoute("/")({ component: Home });
 const MARQUEE = [
   "Aanya", "aka Gobi", "Meanie", "Duke Bound",
   "Atomic Habits", "Forever Lakers", "Pickleball Champ",
-  "Can't Dunk… yet", "Class of 2029", "Bumpy Kars Crew",
+  "Can't Dunk… yet", "Class of 2030", "Bumpy Kars Crew",
   "Timetable Tyrant", "Nikash's Big Sis Energy",
 ];
 
@@ -118,7 +118,7 @@ function Home() {
           >
             <div className="flex items-center gap-3 mb-6">
               <span className="h-px w-12 bg-gold" />
-              <p className="eyebrow text-gold">Aanya · aka Gobi · No. 24 · Class of 2029 · Duke Bound</p>
+              <p className="eyebrow text-gold">Aanya · aka Gobi · No. 24 · Class of 2030 · Duke Bound</p>
             </div>
 
             <h1 className="display font-serif text-[clamp(3.5rem,12vw,11rem)] leading-[0.88]">
