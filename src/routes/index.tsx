@@ -30,7 +30,7 @@ const PRINCIPLES = [
   { n: "01", t: "1% better. Every single day.", b: "Atomic Habits in the gym, in the books, in the kitchen. Compound the small stuff." },
   { n: "02", t: "Timetables aren't cute. They're cheat codes.", b: "Plan the week like a coach plans a playoff run. Then run the play." },
   { n: "03", t: "Can't dunk yet ≠ won't dunk ever.", b: "Today's ceiling is tomorrow's floor. Keep stacking inches — vertical, GPA, life." },
-  { n: "04", t: "Be the one Nikash brags about.", b: "Little brothers are watching. Big sisters set the tone. Show up loud." },
+  { n: "04", t: "Be the one Nikash brags about.", b: "Little brothers are watching. Big sisters set the tone. Show up loud.", whisper: "Nikash is watchingggg 👀" },
 ];
 
 type MVP = { id: string; tournament_id: string; storage_path: string; caption: string | null; tournament: { name: string; date: string | null; result: string | null } | null };
@@ -304,6 +304,11 @@ function Home() {
                 <p className="font-serif text-6xl text-gold/60 group-hover:text-gold transition-colors">{p.n}</p>
                 <h3 className="font-serif text-3xl mt-4 italic">{p.t}</h3>
                 <p className="text-sm text-cream/70 mt-3 leading-relaxed">{p.b}</p>
+                {(p as any).whisper && (
+                  <p className="mt-4 font-serif italic text-gold/90 text-base tracking-wide">
+                    — {(p as any).whisper}
+                  </p>
+                )}
               </motion.div>
             ))}
           </div>
@@ -431,6 +436,9 @@ function Home() {
               <p>Did you ever dunk? Did you ever learn how to ride a bumpy kar? Is Nikash with you right now? (Be nice. Mostly.)</p>
               <p>Remember the timetables nobody asked us to make, the pickleball plans and tourneys. That girl built you. Don't forget her.</p>
               <p>The work is the reward. The Lakers will win another one. And you — you were always meant for the moment.</p>
+              <p className="not-italic text-base md:text-lg text-purple/90 font-sans tracking-wide pt-2 border-t border-border/60">
+                <span className="eyebrow text-purple">P.S.</span> &nbsp;If you forgot how loved you were at 14 — re-read this. Mom, Dad, and Nikash were already so proud. We always have been. 💜💛
+              </p>
             </div>
             <div className="mt-10 flex items-end justify-between">
               <div>
