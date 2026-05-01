@@ -436,6 +436,9 @@ function Home() {
               <p>Did you ever dunk? Did you ever learn how to ride a bumpy kar? Is Nikash with you right now? (Be nice. Mostly.)</p>
               <p>Remember the timetables nobody asked us to make, the pickleball plans and tourneys. That girl built you. Don't forget her.</p>
               <p>The work is the reward. The Lakers will win another one. And you — you were always meant for the moment.</p>
+              <p className="not-italic text-base md:text-lg text-purple/90 font-sans tracking-wide pt-2 border-t border-border/60">
+                <span className="eyebrow text-purple">P.S.</span> &nbsp;If you forgot how loved you were at 14 — re-read this. Mom, Dad, and Nikash were already so proud. We always have been. 💜💛
+              </p>
             </div>
             <div className="mt-10 flex items-end justify-between">
               <div>
