@@ -304,6 +304,11 @@ function Home() {
                 <p className="font-serif text-6xl text-gold/60 group-hover:text-gold transition-colors">{p.n}</p>
                 <h3 className="font-serif text-3xl mt-4 italic">{p.t}</h3>
                 <p className="text-sm text-cream/70 mt-3 leading-relaxed">{p.b}</p>
+                {(p as any).whisper && (
+                  <p className="mt-4 font-serif italic text-gold/90 text-base tracking-wide">
+                    — {(p as any).whisper}
+                  </p>
+                )}
               </motion.div>
             ))}
           </div>
