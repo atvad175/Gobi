@@ -434,6 +434,9 @@ function Home() {
         </div>
       </section>
 
+      {/* HYPE PLAYLIST */}
+      <HypePlaylist />
+
       {/* LETTER TO FUTURE SELF */}
       <section className="bg-cream relative overflow-hidden">
         <div className="absolute inset-0 stripe-bg opacity-40" />
