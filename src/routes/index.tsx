@@ -427,9 +427,9 @@ function Home() {
               ✦ from 9th grade Gobi ✦
             </div>
             <div className="font-serif text-xl md:text-2xl leading-[1.7] text-foreground/90 space-y-5 italic">
-              <p>If you're reading this in a Duke hoodie — I knew it. If it's Harvard crimson — also lit. If it's neither, you better have a <span className="not-italic text-purple">very</span> good story.</p>
-              <p>Did you ever dunk? Did you finish Atomic Habits or just keep restarting chapter 1? Is Nikash still annoying? (Be nice. Mostly.)</p>
-              <p>Remember the bumpy car rides to practice, the timetables nobody asked you to make, the pickleball games at 6 AM. That girl built you. Don't forget her.</p>
+              <p>If you're reading this in a Duke hoodie, I knew it. If it's Harvard crimson — also goated. If it's neither, you better have a <span className="not-italic text-purple">very</span> good story.</p>
+              <p>Did you ever dunk? Did you ever learn how to ride a bumpy kar? Is Nikash with you right now? (Be nice. Mostly.)</p>
+              <p>Remember the timetables nobody asked us to make, the pickleball plans and tourneys. That girl built you. Don't forget her.</p>
               <p>The work is the reward. The Lakers will win another one. And you — you were always meant for the moment.</p>
             </div>
             <div className="mt-10 flex items-end justify-between">
