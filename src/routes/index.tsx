@@ -365,6 +365,9 @@ function Home() {
         </div>
       </section>
 
+      {/* TESTIMONIALS */}
+      <Testimonials />
+
       {/* QUICK LINKS */}
       <section className="max-w-7xl mx-auto px-6 lg:px-10 pb-24">
         <div className="flex items-end justify-between mb-10">
