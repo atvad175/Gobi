@@ -16,6 +16,11 @@ import { QuoteRotator } from "@/components/QuoteRotator";
 import { NextGameCountdown } from "@/components/NextGameCountdown";
 import { Pathway, PathStop } from "@/components/Pathway";
 import { publicUrl } from "@/components/PhotoUpload";
+import { SplitsPanel } from "@/components/SplitsPanel";
+import { Timeline } from "@/components/Timeline";
+import { HypePlaylist } from "@/components/HypePlaylist";
+import { Testimonials } from "@/components/Testimonials";
+import { Achievements } from "@/components/Achievements";
 
 export const Route = createFileRoute("/")({ component: Home });
 
@@ -257,7 +262,8 @@ function Home() {
         </div>
       </section>
 
-      {/* PATHWAY TEASER */}
+      {/* SHOT PROFILE */}
+      <SplitsPanel />
       {pathway.length > 0 && (
         <section className="bg-gradient-to-b from-background to-secondary/40 relative">
           <div className="max-w-7xl mx-auto px-6 lg:px-10 py-24">
@@ -281,6 +287,9 @@ function Home() {
           </div>
         </section>
       )}
+
+      {/* YEAR IN MOTION */}
+      <Timeline />
 
       {/* PRINCIPLES MANIFESTO */}
       <section className="bg-ink text-cream relative overflow-hidden">
@@ -314,6 +323,9 @@ function Home() {
           </div>
         </div>
       </section>
+
+      {/* ACHIEVEMENTS */}
+      <Achievements />
 
       {/* FEATURED JOURNAL */}
       <section className="max-w-7xl mx-auto px-6 lg:px-10 py-24 grid lg:grid-cols-12 gap-12 items-center">
@@ -352,6 +364,9 @@ function Home() {
           )}
         </div>
       </section>
+
+      {/* TESTIMONIALS */}
+      <Testimonials />
 
       {/* QUICK LINKS */}
       <section className="max-w-7xl mx-auto px-6 lg:px-10 pb-24">
@@ -418,6 +433,9 @@ function Home() {
           </p>
         </div>
       </section>
+
+      {/* HYPE PLAYLIST */}
+      <HypePlaylist />
 
       {/* LETTER TO FUTURE SELF */}
       <section className="bg-cream relative overflow-hidden">
