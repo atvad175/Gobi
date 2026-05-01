@@ -22,7 +22,7 @@ export const Route = createFileRoute("/")({ component: Home });
 const MARQUEE = [
   "Aanya", "aka Gobi", "Meanie", "Duke Bound",
   "Atomic Habits", "Forever Lakers", "Pickleball Champ",
-  "Can't Dunk… yet", "Class of 2029", "Bumpy Kars Crew",
+  "Can't Dunk… yet", "Class of 2030", "Bumpy Kars Crew",
   "Timetable Tyrant", "Nikash's Big Sis Energy",
 ];
 
@@ -118,7 +118,7 @@ function Home() {
           >
             <div className="flex items-center gap-3 mb-6">
               <span className="h-px w-12 bg-gold" />
-              <p className="eyebrow text-gold">Aanya · aka Gobi · No. 24 · Class of 2029 · Duke Bound</p>
+              <p className="eyebrow text-gold">Aanya · aka Gobi · No. 24 · Class of 2030 · Duke Bound</p>
             </div>
 
             <h1 className="display font-serif text-[clamp(3.5rem,12vw,11rem)] leading-[0.88]">
@@ -427,9 +427,9 @@ function Home() {
               ✦ from 9th grade Gobi ✦
             </div>
             <div className="font-serif text-xl md:text-2xl leading-[1.7] text-foreground/90 space-y-5 italic">
-              <p>If you're reading this in a Duke hoodie — I knew it. If it's Harvard crimson — also lit. If it's neither, you better have a <span className="not-italic text-purple">very</span> good story.</p>
-              <p>Did you ever dunk? Did you finish Atomic Habits or just keep restarting chapter 1? Is Nikash still annoying? (Be nice. Mostly.)</p>
-              <p>Remember the bumpy car rides to practice, the timetables nobody asked you to make, the pickleball games at 6 AM. That girl built you. Don't forget her.</p>
+              <p>If you're reading this in a Duke hoodie, I knew it. If it's Harvard crimson — also goated. If it's neither, you better have a <span className="not-italic text-purple">very</span> good story.</p>
+              <p>Did you ever dunk? Did you ever learn how to ride a bumpy kar? Is Nikash with you right now? (Be nice. Mostly.)</p>
+              <p>Remember the timetables nobody asked us to make, the pickleball plans and tourneys. That girl built you. Don't forget her.</p>
               <p>The work is the reward. The Lakers will win another one. And you — you were always meant for the moment.</p>
             </div>
             <div className="mt-10 flex items-end justify-between">
@@ -437,7 +437,7 @@ function Home() {
                 <img src={signature} alt="Gobi signature" loading="lazy" className="h-16 w-auto opacity-90" width={1024} height={512} />
                 <p className="eyebrow text-purple mt-2">Aanya "Gobi" · age 14</p>
               </div>
-              <p className="eyebrow text-muted-foreground hidden md:block">Class of 2029 · Birthday Edition</p>
+              <p className="eyebrow text-muted-foreground hidden md:block">Class of 2030 · Birthday Edition</p>
             </div>
           </div>
         </div>
