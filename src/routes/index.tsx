@@ -437,7 +437,7 @@ function Home() {
                 <img src={signature} alt="Gobi signature" loading="lazy" className="h-16 w-auto opacity-90" width={1024} height={512} />
                 <p className="eyebrow text-purple mt-2">Aanya "Gobi" · age 14</p>
               </div>
-              <p className="eyebrow text-muted-foreground hidden md:block">Class of 2029 · Birthday Edition</p>
+              <p className="eyebrow text-muted-foreground hidden md:block">Class of 2030 · Birthday Edition</p>
             </div>
           </div>
         </div>
