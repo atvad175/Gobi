@@ -133,8 +133,8 @@ function Home() {
             </h1>
 
             <p className="mt-8 text-lg text-cream/75 max-w-xl leading-relaxed">
-              Hi, I'm <span className="text-gold">Aanya</span> — but everyone calls me Gobi. National hooper, 9th-grade overthinker, future <span className="italic text-gold">Duke Blue Devil</span> (or Ivy, we'll see who wants me more). <br className="hidden sm:block" />
-              This is my notebook, my highlight reel, and my receipts — all in one place.
+              I'm <span className="text-gold">Aanya</span> — but you already know me as Gobi. Hooper, big sis, pickleball menace, future <span className="italic text-gold">Duke Blue Devil</span> (or Ivy, we'll see who wants me more). <br className="hidden sm:block" />
+              This is the notebook, the highlight reel, and the receipts — all in one place.
             </p>
 
             <div className="mt-10 flex flex-wrap gap-4 items-center">
