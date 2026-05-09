@@ -3,7 +3,9 @@ import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { supabase } from "@/integrations/supabase/client";
 import heroImg from "@/assets/gobi-hero.jpg";
-import actionImg from "@/assets/gobi-action.jpg";
+import actionImg from "@/assets/gobi-jumpshot.jpg";
+import trophyImg from "@/assets/gobi-trophy.jpg";
+import championsImg from "@/assets/gobi-champions.jpg";
 import courtImg from "@/assets/court.jpg";
 import signature from "@/assets/signature.png";
 import { ArrowUpRight, Trophy, BookOpen, GraduationCap, Award, Dumbbell, Quote, Flame, Sparkles, Zap } from "lucide-react";
@@ -327,11 +329,45 @@ function Home() {
       {/* ACHIEVEMENTS */}
       <Achievements />
 
+      {/* RECENT MOMENTS */}
+      <section className="bg-ink text-cream relative overflow-hidden">
+        <div className="absolute inset-0 grain opacity-10" />
+        <div className="max-w-7xl mx-auto px-6 lg:px-10 py-24 relative">
+          <div className="grid lg:grid-cols-12 gap-10 items-end mb-14">
+            <div className="lg:col-span-8">
+              <p className="eyebrow text-gold mb-3">Straight from the road</p>
+              <h2 className="font-serif text-5xl md:text-7xl leading-[0.95]">
+                Recent <span className="italic text-gold">moments.</span>
+              </h2>
+            </div>
+            <p className="lg:col-span-4 text-cream/70 leading-relaxed">
+              Trophies, podiums, post-game grins. The receipts of the grind.
+            </p>
+          </div>
+          <div className="grid md:grid-cols-2 gap-6">
+            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="relative aspect-[4/5] overflow-hidden shadow-elegant">
+              <img src={trophyImg} alt="Gobi carrying the championship trophy on her shoulder" className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
+              <div className="absolute inset-x-0 bottom-0 p-6 bg-gradient-to-t from-ink/95 via-ink/40 to-transparent">
+                <p className="eyebrow text-gold">Trophy in tow</p>
+                <p className="font-serif text-2xl mt-1 italic">"Carry it home."</p>
+              </div>
+            </motion.div>
+            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.1 }} className="relative aspect-[4/5] overflow-hidden shadow-elegant">
+              <img src={championsImg} alt="Gobi on the Neverfold 3x3 podium with her teammates as champions" className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
+              <div className="absolute inset-x-0 bottom-0 p-6 bg-gradient-to-t from-ink/95 via-ink/40 to-transparent">
+                <p className="eyebrow text-gold">Neverfold 3x3 · Champions</p>
+                <p className="font-serif text-2xl mt-1 italic">"Keep hustling."</p>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
       {/* FEATURED JOURNAL */}
       <section className="max-w-7xl mx-auto px-6 lg:px-10 py-24 grid lg:grid-cols-12 gap-12 items-center">
         <div className="lg:col-span-5 relative">
           <div className="aspect-[4/5] overflow-hidden bg-ink stripe-bg">
-            <img src={actionImg} alt="Gobi posing with basketball" className="w-full h-full object-cover" loading="lazy" width={1024} height={1280} />
+            <img src={actionImg} alt="Gobi rising for a jump shot in maroon and blue" className="w-full h-full object-cover" loading="lazy" width={1024} height={1280} />
           </div>
           <div className="absolute -bottom-6 -left-6 bg-cream border border-border px-5 py-4 shadow-card">
             <p className="eyebrow text-purple">From the journal</p>
