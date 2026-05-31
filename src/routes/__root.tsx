@@ -41,8 +41,8 @@ export const Route = createRootRoute({
       { name: "twitter:site", content: "@Lovable" },
       { name: "twitter:title", content: "Gobi" },
       { name: "twitter:description", content: "Designed for excellence." },
-      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/219f9ae6-cc14-4fb2-850e-a689d9158f8f/id-preview-c1a54971--1b642a52-9843-48fd-bf1b-96e9ccc19b99.lovable.app-1778348288468.png" },
-      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/219f9ae6-cc14-4fb2-850e-a689d9158f8f/id-preview-c1a54971--1b642a52-9843-48fd-bf1b-96e9ccc19b99.lovable.app-1778348288468.png" },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/18efc2ac-b213-416d-9fb8-3a5c2248fd47/id-preview-e7f9218b--1b642a52-9843-48fd-bf1b-96e9ccc19b99.lovable.app-1780241481618.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/18efc2ac-b213-416d-9fb8-3a5c2248fd47/id-preview-e7f9218b--1b642a52-9843-48fd-bf1b-96e9ccc19b99.lovable.app-1780241481618.png" },
     ],
     links: [
       {
