@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { supabase } from "@/integrations/supabase/client";
-import heroImg from "@/assets/gobi-hero.jpg";
+import heroImg from "@/assets/gobi-jumpshot.jpg";
 import actionImg from "@/assets/gobi-jumpshot.jpg";
 import trophyImg from "@/assets/gobi-trophy.jpg";
 import championsImg from "@/assets/gobi-champions.jpg";
