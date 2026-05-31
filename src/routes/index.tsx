@@ -37,7 +37,7 @@ const PRINCIPLES = [
   { n: "01", t: "1% better. Every single day.", b: "Atomic Habits in the gym, in the books, in the kitchen. Compound the small stuff." },
   { n: "02", t: "Timetables aren't cute. They're cheat codes.", b: "Plan the week like a coach plans a playoff run. Then run the play." },
   { n: "03", t: "Can't dunk yet ≠ won't dunk ever.", b: "Today's ceiling is tomorrow's floor. Keep stacking inches — vertical, GPA, life." },
-  { n: "04", t: "Be the one Nikash brags about.", b: "Little brothers are watching. Big sisters set the tone. Show up loud.", whisper: "Nikash is watchingggg 👀" },
+  { n: "04", t: "Be the one Nikash brags about.", b: "LITTLE LOVE IS WATCHINNG", whisper: "Nikash is watchingggg 👀" },
 ];
 
 type MVP = { id: string; tournament_id: string; storage_path: string; caption: string | null; tournament: { name: string; date: string | null; result: string | null } | null };
