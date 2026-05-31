@@ -31,14 +31,18 @@ export const Route = createRootRoute({
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Aanya 'Gobi' — Hooper. Scholar. Duke Bound." },
-      { name: "description", content: "The official portfolio of Aanya, aka Gobi — 9th-grade national basketball player, Laker for life, Duke + Ivy bound." },
+      { title: "Gobi" },
+      { name: "description", content: "Designed for excellence." },
       { name: "author", content: "Aanya 'Gobi'" },
-      { property: "og:title", content: "Aanya 'Gobi' — Hooper. Scholar. Duke Bound." },
-      { property: "og:description", content: "Tournament reviews, journal, college notebook, dream board — all in one place." },
+      { property: "og:title", content: "Gobi" },
+      { property: "og:description", content: "Designed for excellence." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
       { name: "twitter:site", content: "@Lovable" },
+      { name: "twitter:title", content: "Gobi" },
+      { name: "twitter:description", content: "Designed for excellence." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/219f9ae6-cc14-4fb2-850e-a689d9158f8f/id-preview-c1a54971--1b642a52-9843-48fd-bf1b-96e9ccc19b99.lovable.app-1778348288468.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/219f9ae6-cc14-4fb2-850e-a689d9158f8f/id-preview-c1a54971--1b642a52-9843-48fd-bf1b-96e9ccc19b99.lovable.app-1778348288468.png" },
     ],
     links: [
       {
