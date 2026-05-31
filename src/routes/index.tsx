@@ -290,8 +290,6 @@ function Home() {
         </section>
       )}
 
-      {/* YEAR IN MOTION */}
-      <Timeline />
 
       {/* PRINCIPLES MANIFESTO */}
       <section className="bg-ink text-cream relative overflow-hidden">
